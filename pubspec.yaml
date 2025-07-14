@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
   
   # State Management
-  flutter_riverpod: ^2.4.9
-  riverpod_annotation: ^2.3.3
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
   
   # Navigation
   go_router: ^16.0.0
@@ -60,8 +60,8 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   
   # Code Generation
-  build_runner: ^2.4.7
-  riverpod_generator: ^2.3.9
+  build_runner: ^2.5.4
+  riverpod_generator: ^2.6.5
   drift_dev: ^2.14.1
   freezed: ^3.1.0
   json_serializable: ^6.7.1
