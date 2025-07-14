@@ -1,0 +1,32 @@
+# Build configuration for code generation
+targets:
+  $default:
+    builders:
+      # Freezed code generation
+      freezed:
+        enabled: true
+        generate_for:
+          - lib/data/models/*.dart
+      
+      # JSON serialization
+      json_serializable:
+        enabled: true
+        generate_for:
+          - lib/data/models/*.dart
+      
+      # Riverpod code generation
+      riverpod_generator:
+        enabled: true
+        generate_for:
+          - lib/presentation/viewmodels/*.dart
+          - lib/core/providers/*.dart
+      
+      # Drift code generation
+      drift_dev:
+        enabled: true
+        generate_for:
+          - lib/data/datasources/local/*.dart
+        options:
+          apply_converters_on_variables: true
+          generate_connect_constructor: true
+          named_parameters: true

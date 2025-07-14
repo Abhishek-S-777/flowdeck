@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "301249412729",
+    "project_id": "flowdeck-b9ee6",
+    "storage_bucket": "flowdeck-b9ee6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301249412729:android:37cf34016bf92d73b5dea8",
+        "android_client_info": {
+          "package_name": "com.flowdeck.flowdeck"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDAIEFhd2sVmGLhdKbrK0NPTCuIWmrgvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

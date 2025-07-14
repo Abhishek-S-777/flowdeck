@@ -1,0 +1,54 @@
+# FVM Version Cache
+.fvm/
+
+# Flutter/Dart/Pub related
+**/build/
+**/.dart_tool/
+**/.flutter-plugins/
+**/.packages
+**/pubspec.lock
+
+# Android related
+**/local.properties
+**/.idea/
+**/.gradle/
+**/gradlew.bat
+**/gradlew
+**/gradle/
+**/app/build/
+
+# iOS related
+**/Pods/
+**/.generated/
+**/DerivedData/
+**/.xcworkspace/
+**/Runner.xcworkspace/
+**/Runner.xcodeproj/
+
+# Web related
+**/web/
+**/manifest.json
+**/favicon.png
+
+# macOS related
+**/macos/Flutter/ephemeral/
+**/macos/Runner.xcworkspace/
+**/macos/Runner.xcodeproj/
+
+# Linux related
+**/linux/flutter/
+**/linux/build/
+
+# Windows related
+**/windows/flutter/
+**/windows/build/
+
+# Miscellaneous
+**/*.log
+**/*.tmp
+**/*.swp
+**/.vscode/
+**/.DS_Store
+**/Thumbs.db
+**/.env
+**/.env.*
