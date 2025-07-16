@@ -1,10 +1,19 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import 'package:flowdeck/core/di/injection_container.dart';
 import 'package:flowdeck/data/models/auth_state.dart';
 import 'package:flowdeck/data/models/user_model.dart';
 
 part 'auth_viewmodel.g.dart';
+
+@riverpod
+Stream<firebase_auth.User?> authStateChanges(dynamic ref) {
+  return firebase_auth.FirebaseAuth.instance
+      .authStateChanges()
+      .handleError((error) {
+  });
+}
 
 @riverpod
 class AuthViewModel extends _$AuthViewModel {
@@ -18,19 +27,27 @@ class AuthViewModel extends _$AuthViewModel {
     required String email,
     required String password,
   }) async {
-    final authRepository = ref.read(authRepositoryProvider);
-
     state = const AsyncValue.loading();
 
     try {
-      final result = await authRepository.signInWithEmailAndPassword(
+      final userCredential =
+          await firebase_auth.FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      if (result.hasError) {
-        state = AsyncValue.error(result.error!, StackTrace.current);
-      }
+      state = AsyncValue.data(
+        AuthState(
+          user: UserModel(
+            id: userCredential.user?.uid ?? '',
+            email: userCredential.user?.email ?? '',
+            firstName:
+                userCredential.user?.displayName?.split(' ').first ?? 'Unknown',
+            lastName: userCredential.user?.displayName?.split(' ').last ?? '',
+          ),
+          isAuthenticated: true,
+        ),
+      );
     } catch (e, stackTrace) {
       state = AsyncValue.error(e, stackTrace);
     }
@@ -42,21 +59,28 @@ class AuthViewModel extends _$AuthViewModel {
     required String firstName,
     required String lastName,
   }) async {
-    final authRepository = ref.read(authRepositoryProvider);
-
     state = const AsyncValue.loading();
 
     try {
-      final result = await authRepository.createUserWithEmailAndPassword(
+      final userCredential = await firebase_auth.FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: email,
         password: password,
-        firstName: firstName,
-        lastName: lastName,
       );
 
-      if (result.hasError) {
-        state = AsyncValue.error(result.error!, StackTrace.current);
-      }
+      await userCredential.user?.updateDisplayName('$firstName $lastName');
+
+      state = AsyncValue.data(
+        AuthState(
+          user: UserModel(
+            id: userCredential.user?.uid ?? '',
+            email: userCredential.user?.email ?? '',
+            firstName: firstName,
+            lastName: lastName,
+          ),
+          isAuthenticated: true,
+        ),
+      );
     } catch (e, stackTrace) {
       state = AsyncValue.error(e, stackTrace);
     }
@@ -111,25 +135,9 @@ class AuthViewModel extends _$AuthViewModel {
       state = AsyncValue.error(e, stackTrace);
     }
   }
-}
 
-// Helper providers
-@riverpod
-UserModel? currentUser(CurrentUserRef ref) {
-  final authState = ref.watch(authViewModelProvider);
-  return authState.when(
-    data: (state) => state.user,
-    loading: () => null,
-    error: (_, __) => null,
-  );
-}
-
-@riverpod
-bool isAuthenticated(IsAuthenticatedRef ref) {
-  final authState = ref.watch(authViewModelProvider);
-  return authState.when(
-    data: (state) => state.isAuthenticated,
-    loading: () => false,
-    error: (_, __) => false,
-  );
+  bool isUserAuthenticated() {
+    final firebaseUser = firebase_auth.FirebaseAuth.instance.currentUser;
+    return firebaseUser != null;
+  }
 }

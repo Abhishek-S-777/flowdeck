@@ -48,7 +48,9 @@ class _BoardsScreenState extends ConsumerState<BoardsScreen> {
                   border: OutlineInputBorder(),
                 ),
                 onChanged: (query) {
-                  ref.read(boardSearchQueryProvider.notifier).updateQuery(query);
+                  ref
+                      .read(boardSearchQueryProvider.notifier)
+                      .updateQuery(query);
                 },
               ),
             ),
@@ -79,11 +81,13 @@ class _BoardsScreenState extends ConsumerState<BoardsScreen> {
                       itemBuilder: (context, index) {
                         final board = boards[index];
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: AppDimensions.md),
+                          padding:
+                              const EdgeInsets.only(bottom: AppDimensions.md),
                           child: BoardCard(
                             board: board,
                             onTap: () => context.push(
-                              AppRoutes.boardDetail.replaceFirst(':boardId', board.id),
+                              AppRoutes.boardDetail
+                                  .replaceFirst(':boardId', board.id),
                             ),
                           ),
                         );

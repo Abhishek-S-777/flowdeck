@@ -23,7 +23,7 @@ enum NotificationType {
 }
 
 @freezed
-class NotificationModel with _$NotificationModel {
+abstract class NotificationModel with _$NotificationModel {
   const factory NotificationModel({
     required String id,
     required String userId,

@@ -1,10 +1,10 @@
+import 'package:flowdeck/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flowdeck/core/constants/app_constants.dart';
 import 'package:flowdeck/core/routing/app_router.dart';
-import 'package:flowdeck/presentation/viewmodels/auth_provider.dart';
 import 'package:flowdeck/presentation/widgets/common/custom_text_field.dart';
 import 'package:flowdeck/presentation/widgets/common/loading_button.dart';
 
@@ -45,11 +45,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       await ref
           .read(authViewModelProvider.notifier)
           .createUserWithEmailAndPassword(
-            context: context,
             email: _emailController.text.trim(),
             password: _passwordController.text,
-            name:
-                '${_firstNameController.text.trim()} ${_lastNameController.text.trim()}',
+            firstName: _firstNameController.text.trim(),
+            lastName: _lastNameController.text.trim(),
           );
 
       if (mounted) {

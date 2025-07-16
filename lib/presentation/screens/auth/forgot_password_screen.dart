@@ -1,9 +1,9 @@
+import 'package:flowdeck/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flowdeck/core/constants/app_constants.dart';
-import 'package:flowdeck/presentation/viewmodels/auth_provider.dart';
 import 'package:flowdeck/presentation/widgets/common/custom_text_field.dart';
 import 'package:flowdeck/presentation/widgets/common/loading_button.dart';
 
@@ -35,7 +35,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
     try {
       await ref
           .read(authViewModelProvider.notifier)
-          .sendPasswordResetEmail(_emailController.text.trim());
+          .sendPasswordResetEmail(email: _emailController.text.trim());
 
       setState(() => _emailSent = true);
     } catch (e) {

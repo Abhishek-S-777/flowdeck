@@ -1,10 +1,10 @@
+import 'package:flowdeck/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flowdeck/core/constants/app_constants.dart';
 import 'package:flowdeck/core/routing/app_router.dart';
-import 'package:flowdeck/presentation/viewmodels/auth_provider.dart';
 import 'package:flowdeck/presentation/widgets/common/custom_text_field.dart';
 import 'package:flowdeck/presentation/widgets/common/loading_button.dart';
 
@@ -35,14 +35,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await ref.read(authViewModelProvider.notifier).signIn(
-            _emailController.text.trim(),
-            _passwordController.text,
+      await ref.read(authViewModelProvider.notifier).signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
           );
 
       if (mounted) {
         // Use GoRouter for navigation
-        context.go(AppRoutes.boards);
+        context.go(AppRoutes.createBoard);
       }
     } catch (e) {
       if (mounted) {

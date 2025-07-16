@@ -1,11 +1,11 @@
 import 'package:flowdeck/core/di/injection_container.dart';
 import 'package:flowdeck/data/models/auth_state.dart';
 import 'package:flowdeck/data/models/user_model.dart';
+import 'package:flowdeck/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'package:flowdeck/presentation/viewmodels/auth_provider.dart';
 import 'package:flowdeck/domain/repositories/auth_repository.dart';
 
 // Mock classes

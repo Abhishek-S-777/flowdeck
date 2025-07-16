@@ -18,7 +18,7 @@ enum TaskPriority {
 }
 
 @freezed
-class Task with _$Task {
+abstract class Task with _$Task {
   const factory Task({
     required String id,
     required String title,

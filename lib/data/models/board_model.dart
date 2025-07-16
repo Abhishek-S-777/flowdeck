@@ -4,7 +4,7 @@ part 'board_model.freezed.dart';
 part 'board_model.g.dart';
 
 @freezed
-class BoardModel with _$BoardModel {
+abstract class BoardModel with _$BoardModel {
   const factory BoardModel({
     required String id,
     required String name,
